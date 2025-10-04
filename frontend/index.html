@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Processor</title>
+</head>
+<body>
+  <h2>Upload Image</h2>
+  <form id="uploadForm">
+    <input type="file" id="fileInput" name="file" required><br><br>
+    <select id="phaseSelect" name="phase">
+      <option value="arterial">Arterial</option>
+      <option value="venous">Venous</option>
+    </select><br><br>
+    <button type="submit">Upload</button>
+  </form>
+
+  <h2>Processed Image</h2>
+  <img id="resultImage" width="300"/>
+
+  <script>
+    const form = document.getElementById("uploadForm");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const fileInput = document.getElementById("fileInput");
+      const phaseSelect = document.getElementById("phaseSelect");
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+      formData.append("phase", phaseSelect.value);
+
+      const response = await fetch("http://127.0.0.1:8000/process", {
+        method: "POST",
+        body: formData
+      });
+
+      const result = await response.json();
+      document.getElementById("resultImage").src = "data:image/png;base64," + result.image;
+    });
+  </script>
+</body>
+</html>
