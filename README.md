@@ -16,23 +16,12 @@ The frontend is a user-friendly interface for uploading images and displaying th
 
 
 
-│
-
 ├── backend/
-
-│ ├── app.py
-
-│ ├── requirements.txt
-
-│ └── venv/
-
+│   ├── app.py
+│   ├── requirements.txt
+│   └── venv/
 │
-
-├── frontend/
-
-│ └── index.html
-
-│
-
+├── index.html   (Frontend)
 └── README.md
+
 
